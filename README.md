@@ -1,6 +1,6 @@
 # LPCA:
 
-![Markdown Logo](./framework_picture.png)
+![Markdown Logo](./framwork.png)
 
 ## Quick Start
 ### Environment variables & dependencies
