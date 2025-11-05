@@ -18,7 +18,6 @@ conda activate DSTAG
 #### For the three datasets ICEWS18, ICEWS14 and ICEWS05-15, go into the dataset folder in the ./data directory and run the following command to construct the static graph.
 ```
 python new_dataprocess.py
-
 ```
 ### Train & Test models
 
