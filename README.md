@@ -1,5 +1,4 @@
 # LPCA:
-# DSTAG:
 
 ![Markdown Logo](./framework_picture.png)
 
