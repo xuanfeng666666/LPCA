@@ -5,9 +5,13 @@
 ## Quick Start
 ### Environment variables & dependencies
 ```
-PyTorch version: 2.2.1
-CUDA version used by PyTorch: 12.1
-DGL version: 2.2.1
+torch                     2.2.0+cu118
+torch_cluster             1.6.3+pt24cu118
+torch-geometric           2.6.1
+torch_scatter             2.1.2+pt24cu118
+torch_sparse              0.6.18+pt24cu118
+torch_spline_conv         1.2.2+pt24cu118
+dgl                       2.2.0+cu118
 
 conda create -n DSTAG python=3.8
 conda activate DSTAG
