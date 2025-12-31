@@ -25,14 +25,14 @@ def parse_args():
     args = argparse.ArgumentParser()
     # network arguments
     args.add_argument("-data", "--data",
-                      default="./data/ICEWS18", help="data directory")
-    args.add_argument('--dataset', type=str, default='ICEWS18')
+                      default="./data/ICEWS14_forecasting", help="data directory")
+    args.add_argument('--dataset', type=str, default='ICEWS14_forecasting')
     args.add_argument("-e_c", "--epochs_conv", type=int,
-                      default=100, help="Number of epochs")
+                      default=8, help="Number of epochs")
     args.add_argument("-w_conv", "--weight_decay_conv", type=float,
                       default=1e-6, help="L2 reglarization for conv")
     args.add_argument("-emb_size", "--embedding_size", type=int,
-                      default=100, help="Size of embeddings (if pretrained not used)")
+                      default=200, help="Size of embeddings (if pretrained not used)")
     args.add_argument("-l", "--lr", type=float, default=1e-4)
     
     # 新增：策略相关参数
@@ -41,7 +41,7 @@ def parse_args():
     args.add_argument("--time_decay_factor", type=float, default=0.1, help="Time decay factor")
     args.add_argument("--path_length_penalty", type=float, default=0.1, help="Path length penalty")
     args.add_argument("--hics_neighbor_sample", type=int, default=10, help="HICS neighbor sample size")
-    args.add_argument("--topk_paths", type=int, default=25, help="Number of paths for TopK selection")
+    args.add_argument("--topk_paths", type=int, default=5, help="Number of paths for TopK selection")
     
     args = args.parse_args()
     return args
@@ -380,7 +380,7 @@ def train_conv(args):
             epoch, sum(epoch_loss) / len(epoch_loss), time.time() - start_time))
         epoch_losses.append(sum(epoch_loss) / len(epoch_loss))
 
-        if epoch == 99:
+        if epoch == 7:
             save_model(model, args.data, model_state_file, epoch)
         
         # if epoch == 99:
@@ -400,7 +400,7 @@ def evaluate_conv(args):
         model = TypeGAT(num_e, num_r*2, relation_embeddings, args.embedding_size)
     
     model.load_state_dict(torch.load(
-        '{0}/trained99.pth'.format(model_state_file)), strict=False)
+        '{0}/top_paths_5_trained99.pth'.format(model_state_file)), strict=False)
     
     if CUDA:
         model.cuda()
@@ -517,7 +517,7 @@ def evaluate_conv(args):
 
 if __name__ == "__main__":
     # 训练模型
-    train_conv(args)
+    # train_conv(args)
     
     # 评估模型
     evaluate_conv(args)
